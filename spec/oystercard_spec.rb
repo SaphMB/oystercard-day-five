@@ -30,13 +30,23 @@ describe Oystercard do
     it 'deducts fare when touching out' do
       expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::FARE)
     end
-
-
   end
 
   context 'touching in without money' do
-    it 'raises an eror' do
+    it 'raises an error' do
       expect{oystercard.touch_in(station)}.to raise_error "Insufficient balance"
+    end
+  end
+
+  context '#journey_history' do
+    it 'starts with an empty journey_history' do
+      expect(oystercard.journey_history).to be_empty
+    end
+    it 'after a journey, journey_history contains a journey' do
+      oystercard.top_up(amount)
+      oystercard.touch_in(station)
+      oystercard.touch_out
+      expect(oystercard.journey_history[0]).to be_a(Journey)
     end
   end
 end
