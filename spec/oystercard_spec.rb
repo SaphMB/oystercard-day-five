@@ -28,7 +28,8 @@ describe Oystercard do
     end
 
     it 'deducts fare when touching out' do
-      expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::FARE)
+      oystercard.touch_in(station)
+      expect{oystercard.touch_out(station)}.to change{oystercard.balance}.by(-Oystercard::FARE)
     end
   end
 
@@ -45,7 +46,7 @@ describe Oystercard do
     it 'after a journey, journey_history contains a journey' do
       oystercard.top_up(amount)
       oystercard.touch_in(station)
-      oystercard.touch_out
+      oystercard.touch_out(station)
       expect(oystercard.journey_history[0]).to be_a(Journey)
     end
   end

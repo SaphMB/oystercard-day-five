@@ -18,10 +18,12 @@ class Oystercard
 
   def touch_in(station)
     fare_check
-    @journey_history << Journey.new(station)
+    @journey_history << Journey.new
+    @journey_history.last.entry_station=(station)
   end
 
-  def touch_out
+  def touch_out(station)
+    @journey_history.last.exit_station=(station)
     deduct
   end
 
