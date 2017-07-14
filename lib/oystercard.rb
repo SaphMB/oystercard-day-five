@@ -18,6 +18,14 @@ class Oystercard
     balancededuct(fare)
   end
 
+  def touch_in
+
+  end
+
+  def touch_out
+
+  end
+
 private
 
   def balancetopup(amount)

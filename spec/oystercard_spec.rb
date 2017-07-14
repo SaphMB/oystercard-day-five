@@ -23,4 +23,14 @@ describe Oystercard do
     expect{oystercard.deduct(Oystercard::FARE)}.to change{oystercard.balance}.by(-Oystercard::FARE)
   end
 
+  context 'touching in and out' do
+    it 'responds to #touch_in' do
+      expect(oystercard).to respond_to :touch_in
+    end
+
+    it 'responds to #touch_out' do
+      expect(oystercard).to respond_to :touch_out
+    end
+  end
+
 end
