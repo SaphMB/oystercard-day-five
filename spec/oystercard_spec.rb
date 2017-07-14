@@ -23,7 +23,9 @@ describe Oystercard do
     expect{oystercard.deduct(Oystercard::FARE)}.to change{oystercard.balance}.by(-Oystercard::FARE)
   end
 
-  context 'touching in and out' do
+  context 'touching in and out with money' do
+    before {oystercard.top_up(amount)}
+
     it 'responds to #touch_in' do
       expect(oystercard).to respond_to :touch_in
     end
@@ -33,4 +35,9 @@ describe Oystercard do
     end
   end
 
+  context 'touching in without money' do
+    it 'raises an eror' do
+      expect{oystercard.touch_in}.to raise_error "Insufficient balance"
+    end
+  end
 end
