@@ -18,4 +18,9 @@ describe Oystercard do
       expect {oystercard.top_up(amount)}.to raise_error "Cannot exceed maximum balance"
     end
   end
+
+  it 'reduces the balance by the fare amount' do
+    expect{oystercard.deduct(Oystercard::FARE)}.to change{oystercard.balance}.by(-Oystercard::FARE)
+  end
+
 end
