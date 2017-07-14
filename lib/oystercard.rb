@@ -15,8 +15,9 @@ class Oystercard
     balancetopup(amount)
   end
 
-  def touch_in
+  def touch_in(station)
     fare_check
+    journey = Journey.new(station)
   end
 
   def touch_out

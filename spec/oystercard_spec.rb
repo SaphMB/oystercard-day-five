@@ -3,6 +3,7 @@ require 'oystercard'
 describe Oystercard do
   subject(:oystercard) {Oystercard.new}
   let(:amount) {5}
+  let(:station) { double(:station) }
 
   it 'shows that there is money on a card' do
     oystercard.top_up(amount)
@@ -35,7 +36,7 @@ describe Oystercard do
 
   context 'touching in without money' do
     it 'raises an eror' do
-      expect{oystercard.touch_in}.to raise_error "Insufficient balance"
+      expect{oystercard.touch_in(station)}.to raise_error "Insufficient balance"
     end
   end
 end
