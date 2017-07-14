@@ -15,16 +15,12 @@ class Oystercard
     balancetopup(amount)
   end
 
-  def deduct(fare = FARE)
-    balancededuct(fare)
-  end
-
   def touch_in
     fare_check
   end
 
   def touch_out
-
+    deduct
   end
 
 private
@@ -37,7 +33,7 @@ private
     raise "Cannot exceed maximum balance" if balance + amount > MAXIMUM_BALANCE
   end
 
-  def balancededuct(fare)
+  def deduct(fare = FARE)
     @balance -= fare
   end
 

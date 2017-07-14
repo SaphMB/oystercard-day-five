@@ -19,10 +19,6 @@ describe Oystercard do
     end
   end
 
-  it 'reduces the balance by the fare amount' do
-    expect{oystercard.deduct(Oystercard::FARE)}.to change{oystercard.balance}.by(-Oystercard::FARE)
-  end
-
   context 'touching in and out with money' do
     before {oystercard.top_up(amount)}
 
@@ -30,9 +26,11 @@ describe Oystercard do
       expect(oystercard).to respond_to :touch_in
     end
 
-    it 'responds to #touch_out' do
-      expect(oystercard).to respond_to :touch_out
+    it 'deducts fare when touching out' do
+      expect{oystercard.touch_out}.to change{oystercard.balance}.by(-Oystercard::FARE)
     end
+
+
   end
 
   context 'touching in without money' do
